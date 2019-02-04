@@ -1,0 +1,28 @@
+{
+  "name": "trellogooglesheetsintegration",
+  "version": "0.0.1",
+  "description": "Intgerate trello to google sheet to manage your sprint/scum workflow",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "trello",
+    "googlesheet",
+    "sprint",
+    "scrum"
+  ],
+  "author": "Raunak Kathuria",
+  "license": "ISC",
+  "dependencies": {
+    "command-line-args": "^5.0.2",
+    "config": "^3.0.1",
+    "googleapis": "^37.1.0",
+    "trello": "^0.9.1"
+  },
+  "devDependencies": {
+    "command-line-usage": "^5.0.5",
+    "js-beautify": "^1.8.9",
+    "jshint": "^2.9.7"
+  }
+}
