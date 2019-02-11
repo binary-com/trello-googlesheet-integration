@@ -71,6 +71,18 @@ if (help) {
     return;
 }
 
+// validates
+if (!process.env.NODE_CONFIG_DIR) throw 'Missing NODE_CONFIG_DIR. Please pass the config directory path where config file is present. To set config file please make use "setdefaults.js".';
+
+if (!process.env.GOOGLE_PRIVATE_KEY_FILE_PATH) throw 'Missing GOOGLE_PRIVATE_KEY_FILE_PATH. Please get JWT private key file from your account. Refer https://developers.google.com/identity/protocols/OAuth2ServiceAccount#jwt-auth.';
+
+if (!process.env.GOOGLE_SPREADSHEET_ID) throw 'Missing GOOGLE_SPREADSHEET_ID, Please provide spreadsheet id to track sprint.';
+
+if (!process.env.TRELLO_API_KEY) throw 'Missing TRELLO_API_KEY. Please provide your trello user API key.';
+
+if (!process.env.TRELLO_API_TOKEN) throw 'Missing TRELLO_API_TOKEN. Please provide your trello user API token.';
+
+
 const operation = options.operation;
 const sheetName = options.sheet ? options.sheet : "backlog";
 const googlesheetConfig = config.getGooglesheetConfig;
@@ -111,7 +123,7 @@ if (!operation) {
  */
 async function readCredentialsFile() {
     const readFile = util.promisify(fs.readFile);
-    return await readFile(process.env.GOOGLE_PRIVATE_KEY_FILE, 'utf8');
+    return await readFile(process.env.GOOGLE_PRIVATE_KEY_FILE_PATH, 'utf8');
 }
 
 /**

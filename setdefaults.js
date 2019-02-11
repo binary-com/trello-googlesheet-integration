@@ -2,6 +2,7 @@ const fs = require('fs-extra');
 const prompt = require('prompt');
 prompt.colors = false;
 
+if (!process.env.CONFIG_FILE_PATH) throw 'Missing CONFIG_FILE_PATH. Please provide complete path to config file that will used to store trello and googlesheet configurations';
 
 var schema = {
     properties: {
@@ -48,6 +49,7 @@ var schema = {
         },
         'sheets.backlog.range': {
             pattern: /^![A-Z]\d+(?:\:[A-Z]\d*){1}$/,
+            message: 'Must be of GridRange format, for example, !A2:Z. Refer https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/other#gridrange',
             default: '!A2:Z'
         },
         'sheets.unplanned.name': {
@@ -58,6 +60,7 @@ var schema = {
         },
         'sheets.unplanned.range': {
             pattern: /^![A-Z]\d+(?:\:[A-Z]\d*){1}$/,
+            message: 'Must be of GridRange format, for example, !A2:Z. Refer https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/other#gridrange',
             default: '!A3:Z'
         },
         'sheets.sprint.name': {
@@ -68,6 +71,7 @@ var schema = {
         },
         'sheets.sprint.range': {
             pattern: /^![A-Z]\d+(?:\:[A-Z]\d*){1}$/,
+            message: 'Must be of GridRange format, for example, !A2:Z. Refer https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/other#gridrange',
             default: '!A2:H'
         },
     }
@@ -76,7 +80,7 @@ var schema = {
 prompt.start();
 
 prompt.get(schema, function(err, result) {
-    const FILENAME = process.env.CONFIG_FILE_PATH || 'config/default.json';
+    const FILENAME = process.env.CONFIG_FILE_PATH;
 
     fs.outputFile(FILENAME, JSON.stringify(requestParamsToJSON(result), null, 2), 'utf8').then(() => {
         console.log('The config file was saved!');
@@ -85,12 +89,16 @@ prompt.get(schema, function(err, result) {
     });
 });
 
+/**
+ * Populate and return JSON format from input enter on prompt line
+ * @param {params} object that contains values provided
+ */
 function requestParamsToJSON(params) {
     let config = {
         "trello": {
             "board": {
                 "sprint": {
-                    "id": params['sprint.board.id'],
+                    "id": params['sprint.trello.board.id'],
                     "listToExclude": params['sprint.trello.board.listToExclude'],
                     "sprintLabel": {
                         "id": params['sprint.trello.label.id'],
