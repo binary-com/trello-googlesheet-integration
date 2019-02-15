@@ -136,7 +136,7 @@ function filterCardDetails(card) {
 }
 
 /**
- * Get estimate pointsfrom card name/title,
+ * Get estimate points from card name/title,
  * for e.g. consider (16) sample task [20] as card name
  * then this sub will return 16, we use scrum plugin
  * to add estimated and consumed points

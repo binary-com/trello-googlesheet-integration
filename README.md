@@ -47,7 +47,7 @@ prompt: Googlesheet sheet name used to maintain unplanned cards added in current
 prompt: sheets.unplanned.range: (!A3:Z) 
 prompt: Googlesheet sheet name used to maintain status of planned cards of current sprint: (Sprint) 
 prompt: sheets.sprint.range: (!A2:H) 
-The config file was saved!
+The config file successfully saved!
 ```
 
 The structure of saved file, `/tmp/default.json`, is:

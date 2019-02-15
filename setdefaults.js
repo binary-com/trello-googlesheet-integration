@@ -9,7 +9,7 @@ var schema = {
         'sprint.trello.board.id': {
             pattern: /^[a-zA-Z0-9]+$/,
             description: 'Enter trello board id used for sprint',
-            message: 'Must be alphanumberic',
+            message: 'Must be alphanumeric',
             required: true
         },
         'sprint.trello.board.listToExclude': {
@@ -21,12 +21,12 @@ var schema = {
         'sprint.trello.label.id': {
             pattern: /^[a-zA-Z0-9]+$/,
             description: 'Id for label used for cards in current sprint',
-            message: 'Must be alphanumberic.',
+            message: 'Must be alphanumeric.',
             required: true
         },
         'sprint.trello.label.name': {
             pattern: /^[a-zA-Z0-9]+$/,
-            message: 'Must be alphanumberic.',
+            message: 'Must be alphanumeric.',
             description: 'Name for label used for cards in current sprint',
             required: true,
             default: 'Planned'
@@ -34,7 +34,7 @@ var schema = {
         'release.trello.board.id': {
             pattern: /^[a-zA-Z0-9]+$/,
             description: 'Enter trello board id used for release, that is, a separate board to handle completed sprint cards',
-            message: 'Must be alphanumberic.',
+            message: 'Must be alphanumeric.',
         },
         'release.trello.board.listToExclude': {
             pattern: /^[A-Za-z0-9]+(?:, ?[A-Za-z0-9]+)*$/,
@@ -44,7 +44,7 @@ var schema = {
         'sheets.backlog.name': {
             pattern: /^[a-zA-Z0-9]+$/,
             description: 'Googlesheet sheet name used to maintain current sprint backlog',
-            message: 'Must be alphanumberic.',
+            message: 'Must be alphanumeric.',
             default: 'SprintBacklog'
         },
         'sheets.backlog.range': {
@@ -55,7 +55,7 @@ var schema = {
         'sheets.unplanned.name': {
             pattern: /^[a-zA-Z0-9]+$/,
             description: 'Googlesheet sheet name used to maintain unplanned cards added in current sprint',
-            message: 'Must be alphanumberic.',
+            message: 'Must be alphanumeric.',
             default: 'Unplanned'
         },
         'sheets.unplanned.range': {
@@ -66,7 +66,7 @@ var schema = {
         'sheets.sprint.name': {
             pattern: /^[a-zA-Z0-9]+$/,
             description: 'Googlesheet sheet name used to maintain status of planned cards of current sprint',
-            message: 'Must be alphanumberic.',
+            message: 'Must be alphanumeric.',
             default: 'Sprint'
         },
         'sheets.sprint.range': {
@@ -83,7 +83,7 @@ prompt.get(schema, function(err, result) {
     const FILENAME = process.env.CONFIG_FILE_PATH;
 
     fs.outputFile(FILENAME, JSON.stringify(requestParamsToJSON(result), null, 2), 'utf8').then(() => {
-        console.log('The config file was saved!');
+        console.log('The config file was saved successfully.');
     }).catch(err => {
         console.log(err);
     });

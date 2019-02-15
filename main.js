@@ -160,7 +160,7 @@ function get(auth) {
     sheets.spreadsheets.values.get({
         auth: auth,
         spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
-        range: 'Unplanned!A3:Z',
+        range: googlesheetConfig["sheets"][sheetName]["name"] + googlesheetConfig["sheets"][sheetName]["range"],
     }, (err, response) => {
         if (err) {
             console.error(err);
