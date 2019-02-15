@@ -20,7 +20,7 @@ const optionDefinitions = [{
     name: 'operation',
     alias: 'o',
     type: String,
-    description: "Operation you want to perform on your google spreadsheet. Current operations are: {blue.bold get} - {cyan.italic get list of entries in google spreatsheet (take additional option --sheet)}, {blue.bold clear} - {cyan.italic clear list of cards in google spreadsheet (take additional option --sheet)}, {blue.bold createBacklog} - {cyan.italic write cards in current sprint to google spreadsheet (perform this at starting of each sprint)}, {blue.bold addToUnplanned} - {cyan.italic update unplanned google spreadsheet for cards added in between sprint}, {blue.bold updateSheet} - {cyan.italic Read current entries present in sheet then fetch corresponding card details from trello and update values} and {blue.bold addSprintLabel} - {cyan.italic add sprint, default: Planned, to cards in trello board}"
+    description: "Operation you want to perform on your google spreadsheet. Current operations are: {blue.bold get} - {cyan.italic get list of entries in google spreatsheet (take additional option --sheet)}, {blue.bold addSprintLabel} - {cyan.italic add sprint label, default: Planned, to cards in trello board (perform this at starting of sprint)}, {blue.bold createBacklog} - {cyan.italic fetch cards in current sprint from trello board and write them to google spreadsheet (perform this at starting of each sprint)}, {blue.bold addToUnplanned} - {cyan.italic update unplanned google spreadsheet for cards added in between sprint}, {blue.bold updateSheet} - {cyan.italic Read current entries present in sheet then fetch corresponding card details from trello and update values} and {blue.bold clear} - {cyan.italic clear list of cards in google spreadsheet (take additional option --sheet)}"
 }, {
     name: 'sheet',
     alias: 's',
@@ -35,8 +35,8 @@ const optionDefinitions = [{
 }, ];
 
 const sections = [{
-        header: 'Trello google sheet integration for spritn',
-        content: 'Integrate trello and google sheet for handling sprint/scrum for your team.'
+        header: 'Trello google sheet integration for sprint',
+        content: 'Integrate trello and google sheet for handling sprint for your team.'
     },
     {
         header: 'Synopsis',

@@ -85,7 +85,9 @@ function getCardsOnList(list) {
 async function addSprintLabel() {
     let cards = await getCards();
     cards.all.forEach((card) => {
-        trello.addLabelToCard(card.id, trelloConfig.board.sprint.sprintLabel.id).then((response) => {}, (reason) => {
+        trello.addLabelToCard(card.id, trelloConfig.board.sprint.sprintLabel.id).then((response) => {
+            console.log("Label successfully added.");
+        }, (reason) => {
             console.log(reason);
         });
     });
