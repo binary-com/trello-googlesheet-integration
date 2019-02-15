@@ -1,0 +1,8 @@
+{
+    "maxerr"        : 50,       // {int} Maximum error before stopping
+    "camelcase"     : false,    // true: Identifiers must be in camelCase
+    "unused"        : true,     // Unused variables:
+    "strict"        : true,     // true: Requires all functions run in ES5 Strict Mode
+    "esversion"     : 6,        // {int} Specify the ECMAScript version to which the code must adhere.
+    "node"          : true
+}
