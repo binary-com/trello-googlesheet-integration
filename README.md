@@ -2,6 +2,19 @@
 
 Integrate trello with googlesheet for handling current sprint of your team. 
 
+### Installation
+
+```
+# fetch this repository
+git@github.com:binary-com/trello-googlesheet-integration.git
+
+# enter the repository
+cd trello-googlesheet-integration
+
+# install
+npm install
+````
+
 ### Google sheet structure and usage
 
 [Click here for the template](https://docs.google.com/spreadsheets/d/1t7CxFb01b_5xDnYzmantBxANexdUw2h_kLIXFxiQyvA/edit?usp=sharing).  To use the template just click on `File` then `Make a copy` and note down the spreadsheet id. For example, the URL of template is https://docs.google.com/spreadsheets/d/1t7CxFb01b_5xDnYzmantBxANexdUw2h_kLIXFxiQyvA/edit?usp=sharing,  `1t7CxFb01b_5xDnYzmantBxANexdUw2h_kLIXFxiQyvA` represent the spreadsheet id.

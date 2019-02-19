@@ -13,9 +13,9 @@ var schema = {
             required: true
         },
         'sprint.trello.board.listToExclude': {
-            pattern: /^[A-Za-z0-9]+(?:, ?[A-Za-z0-9]+)*$/,
+            pattern: /^[A-Za-z0-9\s\()\.-]+(?:, ?[A-Za-z0-9\s\()\.-]+)*$/,
             description: 'List to exclude contains comma separated values for list to be excluded from fetching cards in corresponding list',
-            message: 'Comma separated list of alphanumeric characters',
+            message: 'Comma separated list of alphanumeric characters plus allower characters: (, ), space and -',
             default: 'Backlog'
         },
         'sprint.trello.label.id': {
@@ -25,8 +25,8 @@ var schema = {
             required: true
         },
         'sprint.trello.label.name': {
-            pattern: /^[a-zA-Z0-9]+$/,
-            message: 'Must be alphanumeric.',
+            pattern: /^[a-zA-Z0-9\s]+$/,
+            message: 'Must be alphanumeric characters separated by space.',
             description: 'Name for label used for cards in current sprint',
             required: true,
             default: 'Planned'
