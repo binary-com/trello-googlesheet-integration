@@ -317,6 +317,7 @@ async function addToUnplanned(auth) {
  * fetched from trello.
  * @param {auth} The google authentication client based on JWT
  */
+let detailsToUpdate = [];
 async function updateSheet(auth) {
     const sheets = google.sheets({
         version: 'v4',
@@ -324,7 +325,6 @@ async function updateSheet(auth) {
     });
 
     let promiseArray = [];
-    let dataToUpdate = [];
     sheets.spreadsheets.values.get({
         spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
         range: googlesheetConfig["sheets"][sheetName]["name"] + googlesheetConfig["sheets"][sheetName]["range"],
