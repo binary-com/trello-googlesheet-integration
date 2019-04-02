@@ -15,11 +15,11 @@ let unplannedCards = [];
  * @param{board} board name for which cards need to be fetched [optional]
  */
 async function getCards(board = trelloConfig.board.sprint) {
-    let lists = await getTrelloListOnBoard();
+    let lists = await getFilteredListDetails();
     let promiseArray = [];
 
-    lists.forEach((list) => {
-        promiseArray.push(getCardsOnList(list));
+    Object.keys(lists).forEach((listId) => {
+        promiseArray.push(getCardsOnList(listId));
     });
 
     await Promise.all(promiseArray).then(() => {
@@ -36,11 +36,7 @@ async function getCards(board = trelloConfig.board.sprint) {
                     return label;
                 }
             });
-            if (plannedLabel.length > 0) {
-                plannedCards.push(filterCardDetails(card));
-            } else {
-                unplannedCards.push(filterCardDetails(card));
-            }
+            (plannedLabel.length ? plannedCards : unplannedCards).push(filterCardDetails(card, lists[card["idList"]]));
         });
     }
 
@@ -70,8 +66,8 @@ function getTrelloListOnBoard(board = trelloConfig.board.sprint) {
  * Get cards on a particular list
  * @param {list} list on trello
  */
-function getCardsOnList(list) {
-    return trello.getCardsOnList(list.id).then((cards) => {
+function getCardsOnList(listId) {
+    return trello.getCardsOnList(listId).then((cards) => {
         return allCards.push(...cards);
     }, (reason) => {
         console.log(reason);
@@ -101,23 +97,39 @@ async function addSprintLabel() {
  */
 async function getCardDetails(id) {
     const TRELLO_CARD_NOT_FOUND_ERRORS = ["Could not find the card", "invalid id"];
+
+    let lists = await getFilteredListDetails();
+
     return trello.getCard(trelloConfig.board.sprint.id, id).then((card) => {
         if (TRELLO_CARD_NOT_FOUND_ERRORS.includes(card)) {
             return trello.getCard(trelloConfig.board.release.id, id).then((card) => {
                 if (TRELLO_CARD_NOT_FOUND_ERRORS.includes(card)) {
                     return;
                 } else {
-                    return filterCardDetails(card);
+                    return filterCardDetails(card, lists[card["idList"]]);
                 }
             }, (reason) => {
                 return;
             });
         } else {
-            return filterCardDetails(card);
+            return filterCardDetails(card, lists[card["idList"]]);
         }
     }, (reason) => {
         return;
     });
+}
+
+/*
+ * Get list details in form of {id: name}
+ */
+async function getFilteredListDetails() {
+    let lists = await getTrelloListOnBoard();
+
+    // get list element as {id: name} key pairs
+    return lists.reduce((obj, currentElement) => {
+        obj[currentElement.id] = currentElement.name;
+        return obj;
+    }, {});
 }
 
 
@@ -125,13 +137,15 @@ async function getCardDetails(id) {
  * Filter details of card to what fields are required
  * @param {card} card on trello
  */
-function filterCardDetails(card) {
+function filterCardDetails(card, listName) {
     return {
         name: card.name,
         identifier: card.id,
         url: card.shortUrl,
         estimate: getEstimateFromCardName(card.name),
-        consumed: getConsumedFromCardName(card.name)
+        consumed: getConsumedFromCardName(card.name),
+        member: '',
+        status: listName
     };
 }
 
