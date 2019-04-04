@@ -144,7 +144,7 @@ function filterCardDetails(card, listName) {
         url: card.shortUrl,
         estimate: getEstimateFromCardName(card.name),
         consumed: getConsumedFromCardName(card.name),
-        member: '',
+        member: getMemberFromCardName(card.name),
         status: listName
     };
 }
@@ -183,6 +183,27 @@ function getConsumedFromCardName(cardName) {
     }
 
     return consumed;
+}
+
+/**
+ * Get member from card name
+ * for e.g. consider (16) developer/sample_task [20] as card name
+ * then this sub will return developer
+ * It's based on assumption that cards are named like
+ * developer/task_meta_desc
+ * Trello members can be used if we have only single member
+ * per card but in general card has multiple members
+ * @{cardName} name or title of the card
+ */
+function getMemberFromCardName(cardName) {
+    let regExp = /^(?:\([-+]?[0-9]*\.?[0-9]+\)\s)?([a-zA-Z0-9_-]+)\//;
+
+    let member = '';
+    if (regExp.test(cardName)) {
+        member = regExp.exec(cardName)[1];
+    }
+
+    return member;
 }
 
 module.exports = {
