@@ -396,7 +396,7 @@ async function getTrelloCards(label) {
  * @param {card} card for which filtering needs to be done
  */
 function filterDetailsOfCard(card) {
-    return [card.name, card.identifier, card.url, card.estimate, card.consumed, card.member, card.status]
+    return [card.name, card.identifier, card.url, card.estimate, card.consumed, card.member, card.status, card.due]
 }
 
 /**
@@ -415,7 +415,7 @@ async function getDetailsInSheetFormat(entry, currentRangeIndex) {
     processedDetails = processedDetails.map((value) => [value])
 
     detailsToUpdate.push({
-        range: googlesheetConfig["sheets"][sheetName]["name"] + '!A' + currentRangeIndex + ':G' + currentRangeIndex,
+        range: googlesheetConfig["sheets"][sheetName]["name"] + '!A' + currentRangeIndex + ':H' + currentRangeIndex,
         majorDimension: "COLUMNS",
         values: processedDetails
     });

@@ -145,7 +145,8 @@ function filterCardDetails(card, listName) {
         estimate: getEstimateFromCardName(card.name),
         consumed: getConsumedFromCardName(card.name),
         member: getMemberFromCardName(card.name),
-        status: listName
+        status: listName,
+        due: card.due ? new Date(card.due).toISOString().split('T')[0] : null
     };
 }
 
