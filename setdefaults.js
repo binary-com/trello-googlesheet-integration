@@ -43,9 +43,9 @@ var schema = {
         },
         'sheets.backlog.name': {
             pattern: /^[a-zA-Z0-9]+$/,
-            description: 'Googlesheet sheet name used to maintain current sprint backlog',
+            description: 'Googlesheet sheet name used to maintain cards, and status, of current sprint.',
             message: 'Must be alphanumeric.',
-            default: 'SprintBacklog'
+            default: 'Sprint'
         },
         'sheets.backlog.range': {
             pattern: /^![A-Z]\d+(?:\:[A-Z]\d*){1}$/,
@@ -62,17 +62,6 @@ var schema = {
             pattern: /^![A-Z]\d+(?:\:[A-Z]\d*){1}$/,
             message: 'Must be of GridRange format, for example, !A2:Z. Refer https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/other#gridrange',
             default: '!A3:Z'
-        },
-        'sheets.sprint.name': {
-            pattern: /^[a-zA-Z0-9]+$/,
-            description: 'Googlesheet sheet name used to maintain status of planned cards of current sprint',
-            message: 'Must be alphanumeric.',
-            default: 'Sprint'
-        },
-        'sheets.sprint.range': {
-            pattern: /^![A-Z]\d+(?:\:[A-Z]\d*){1}$/,
-            message: 'Must be of GridRange format, for example, !A2:Z. Refer https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/other#gridrange',
-            default: '!A2:H'
         },
     }
 };
