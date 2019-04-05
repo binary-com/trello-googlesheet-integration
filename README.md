@@ -49,18 +49,16 @@ It will prompt you to provide few configurations files, default values are enclo
 ```
 CONFIG_FILE_PATH=/tmp/default.json node setdefaults.js
 prompt: Enter trello board id used for sprint: 5c62815ba5901b8e82fa2f41
-prompt: List to exclude contains comma separated values for list to be excluded from fetching cards in corresponding list: (Backlog) 
+prompt: List to exclude contains comma separated values for list to be excluded from fetching cards in corresponding list: (Backlog)
 prompt: Id for label used for cards in current sprint: 5c6281b3141ef65a6e30ac6f
-prompt: Name for label used for cards in current sprint: (Planned) 
-prompt: Enter trello board id used for release, that is, a separate board to handle completed sprint cards: 
-prompt: List to exclude contains comma separated values for board list to be excluded from fetching cards in corresponding list: 
-prompt: Googlesheet sheet name used to maintain current sprint backlog: (SprintBacklog) 
-prompt: sheets.backlog.range: (!A2:Z) 
-prompt: Googlesheet sheet name used to maintain unplanned cards added in current sprint: (Unplanned) 
-prompt: sheets.unplanned.range: (!A3:Z) 
-prompt: Googlesheet sheet name used to maintain status of planned cards of current sprint: (Sprint) 
-prompt: sheets.sprint.range: (!A2:H) 
-The config file successfully saved!
+prompt: Name for label used for cards in current sprint: (Planned)
+prompt: Enter trello board id used for release, that is, a separate board to handle completed sprint cards:
+prompt: List to exclude contains comma separated values for board list to be excluded from fetching cards in corresponding list:
+prompt: Googlesheet sheet name used to maintain cards, and status, of current sprint.: (Sprint)
+prompt: sheets.backlog.range: (!A2:H)
+prompt: Googlesheet sheet name used to maintain unplanned cards added in current sprint: (Unplanned)
+prompt: sheets.unplanned.range: (!A3:H)
+The config file was saved successfully.
 ```
 
 The structure of saved file, `/tmp/default.json`, is:
@@ -86,16 +84,12 @@ The structure of saved file, `/tmp/default.json`, is:
   "googlesheet": {
     "sheets": {
       "backlog": {
-        "name": "SprintBacklog",
-        "range": "!A2:Z"
+        "name": "Sprint",
+        "range": "!A2:H"
       },
       "unplanned": {
         "name": "Unplanned",
-        "range": "!A3:Z"
-      },
-      "sprint": {
-        "name": "Sprint",
-        "range": "!A2:H"
+        "range": "!A3:H"
       }
     }
   }
@@ -199,7 +193,7 @@ Replace `<operation_name>` with a supported operation. Current supported operati
   node main.js -o createBacklog
   ```
 
-  it will add trello cards marked with sprint label, `Planned`, to the `SprintBacklog` sheet
+  it will add trello cards marked with sprint label, `Planned`, to the `Sprint` sheet
 
   ![sprint backlog created](files/images/sprint_backlog_created.png)
 

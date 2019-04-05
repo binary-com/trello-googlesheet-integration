@@ -50,7 +50,7 @@ var schema = {
         'sheets.backlog.range': {
             pattern: /^![A-Z]\d+(?:\:[A-Z]\d*){1}$/,
             message: 'Must be of GridRange format, for example, !A2:Z. Refer https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/other#gridrange',
-            default: '!A2:Z'
+            default: '!A2:H'
         },
         'sheets.unplanned.name': {
             pattern: /^[a-zA-Z0-9]+$/,
@@ -61,7 +61,7 @@ var schema = {
         'sheets.unplanned.range': {
             pattern: /^![A-Z]\d+(?:\:[A-Z]\d*){1}$/,
             message: 'Must be of GridRange format, for example, !A2:Z. Refer https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/other#gridrange',
-            default: '!A3:Z'
+            default: '!A3:H'
         },
     }
 };
@@ -110,10 +110,6 @@ function requestParamsToJSON(params) {
                     "name": params['sheets.unplanned.name'],
                     "range": params['sheets.unplanned.range']
                 },
-                "sprint": {
-                    "name": params['sheets.sprint.name'],
-                    "range": params['sheets.sprint.range']
-                }
             }
         }
     };
