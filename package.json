@@ -26,7 +26,7 @@
     "config": "^3.0.1",
     "const": "^1.0.0",
     "fs-extra": "^7.0.1",
-    "googleapis": "^37.1.0",
+    "googleapis": "^41.0.1",
     "trello": "^0.9.1"
   },
   "devDependencies": {
