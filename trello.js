@@ -36,7 +36,18 @@ async function getCards(board = trelloConfig.board.sprint) {
                     return label;
                 }
             });
-            (plannedLabel.length ? plannedCards : unplannedCards).push(filterCardDetails(card, lists[card["idList"]]));
+
+            let unplannedLabel = card.labels.filter(label => {
+                if (board.unplannedLabel && label.name === board.unplannedLabel.name) {
+                    return label;
+                }
+            });
+
+            if (plannedLabel.length) {
+                plannedCards.push(filterCardDetails(card, lists[card["idList"]]));
+            } else if (unplannedLabel.length) {
+                unplannedCards.push(filterCardDetails(card, lists[card["idList"]]));
+            }
         });
     }
 
@@ -145,8 +156,8 @@ function filterCardDetails(card, listName) {
         estimate: getEstimateFromCardName(card.name),
         consumed: getConsumedFromCardName(card.name),
         member: getMemberFromCardName(card.name),
-        status: card.closed ? 'Archived' : listName,
-        due: card.closed ? (card.dateLastActivity ? new Date(card.dateLastActivity).toISOString().split('T')[0] : null) : (card.due ? new Date(card.due).toISOString().split('T')[0] : null)
+        status: card.closed && card.due ? 'Ready' : (card.closed ? 'Archived' : listName),
+        due: card.due ? new Date(card.due).toISOString().split('T')[0] : (card.closed ? new Date(card.dateLastActivity).toISOString().split('T')[0] : null)
     };
 }
 

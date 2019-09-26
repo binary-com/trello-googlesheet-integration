@@ -18,18 +18,31 @@ var schema = {
             message: 'Comma separated list of alphanumeric characters plus allower characters: (, ), space and -',
             default: 'Backlog'
         },
+        'sprint.trello.label.name': {
+            pattern: /^[a-zA-Z0-9\s]+$/,
+            message: 'Must be alphanumeric characters separated by space.',
+            description: 'Name for label used for cards in current sprint',
+            default: 'Planned',
+            required: true
+        },
         'sprint.trello.label.id': {
             pattern: /^[a-zA-Z0-9]+$/,
             description: 'Id for label used for cards in current sprint',
             message: 'Must be alphanumeric.',
             required: true
         },
-        'sprint.trello.label.name': {
+        'unplanned.trello.label.name': {
             pattern: /^[a-zA-Z0-9\s]+$/,
             message: 'Must be alphanumeric characters separated by space.',
-            description: 'Name for label used for cards in current sprint',
-            required: true,
-            default: 'Planned'
+            description: 'Name for label used for unplanned cards in current sprint',
+            default: 'Unplanned',
+            required: true
+        },
+        'unplanned.trello.label.id': {
+            pattern: /^[a-zA-Z0-9]+$/,
+            description: 'Id for label used for unplanned cards in current sprint',
+            message: 'Must be alphanumeric.',
+            required: true
         },
         'release.trello.board.id': {
             pattern: /^[a-zA-Z0-9]+$/,
@@ -92,6 +105,10 @@ function requestParamsToJSON(params) {
                     "sprintLabel": {
                         "id": params['sprint.trello.label.id'],
                         "name": params['sprint.trello.label.name']
+                    },
+                    "unplannedLabel": {
+                        "id": params['unplanned.trello.label.id'],
+                        "name": params['unplanned.trello.label.name']
                     }
                 },
                 "release": {
